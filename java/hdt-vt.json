@@ -1,0 +1,47 @@
+{
+	"logEveryClass"         : false,
+	"ignoreByDefault"		: false,
+	"verifyAllMethods"		: false,
+	"logAllMethods"         : false,
+	"useQuickScan"          : true,
+	"logSuccesses"          : false,
+	"extraVerification"     : true,
+	"skipDebugData"     	: false,
+	"ignoreWarnings"        : [ "newArray" ],
+	"classDumpPath"         : "../../vt-classes",
+
+	"autoMethods" : [
+		"Ljava/lang/String; java.lang.Object.toString(LValueType;)",
+		"[LValueType; java/util/Arrays.copyOf([LValueType;I)",
+		"[LValueType; java.util.Arrays.copyOf([LValueType;ILjava/lang/Class;)",
+		"[LValueType; java.util.Arrays.copyOfRange([LValueType;II)",
+		"Z java/util/Arrays.equals([LValueType;[LValueType;)",
+		"V deltix.util.collections.SafeArrays.safeArrayCopy([LValueType;I[LValueType;II)",
+		"V deltix.vtype.unit.SafeArrayCopy.safeArrayCopy([LValueType;I[LValueType;II)",
+		"J deltix.util.memory.EstimatorUtils.getSizeInMemory([LValueType;)"
+	],
+
+	"mappings" :
+	[
+		{
+			"name"			: "deltix/hddatetime/HdTimeSpan",
+			"implementation": "deltix/hddatetime/HdTimeSpanUtils",
+			"box"			: "deltix/hddatetime/HdTimeSpan deltix/hddatetime/HdTimeSpan.fromUnderlying(J)",
+			"unbox"			: "J deltix/hddatetime/HdTimeSpan.toUnderlying(Ldeltix/hddatetime/HdTimeSpan;)",
+			"boxArray"		: "[Ldeltix/hddatetime/HdTimeSpan; deltix/hddatetime/HdTimeSpanUtils.fromLongArray([J)",
+			"unboxArray"	: "[J deltix/hddatetime/HdTimeSpanUtils.toLongArray([Ldeltix/hddatetime/HdTimeSpan;)",
+			"methodSuffix"  : "Checked",
+			"staticMethodSuffix"  : ""
+		},
+		{
+			"name"			: "deltix/hddatetime/HdDateTime",
+			"implementation": "deltix/hddatetime/HdDateTimeUtils",
+			"box"			: "deltix/hddatetime/HdDateTime deltix/hddatetime/HdDateTime.fromUnderlying(J)",
+			"unbox"			: "J deltix/hddatetime/HdDateTime.toUnderlying(Ldeltix/hddatetime/HdDateTime;)",
+			"boxArray"		: "[Ldeltix/hddatetime/HdDateTime; deltix/hddatetime/HdDateTimeUtils.fromLongArray([J)",
+			"unboxArray"	: "[J deltix/hddatetime/HdDateTimeUtils.toLongArray([Ldeltix/hddatetime/HdDateTime;)",
+			"methodSuffix"  : "Checked",
+			"staticMethodSuffix"  : ""
+		}
+	]
+}

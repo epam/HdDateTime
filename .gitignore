@@ -1,0 +1,5 @@
+.vs/
+.idea/
+.gradle/
+*.VC.db
+*.user

@@ -1,0 +1,72 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    valueTypesTestCompile.extendsFrom testCompile
+}
+
+repositories {
+    mavenCentral()
+    // mavenDeltix("Deltix.Java")
+    // mavenDeltix("RTMath.Java")
+    //mavenLocal()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.+'
+
+    testCompile 'org.ow2.asm:asm-tree:6.1.1'
+    testCompile 'org.ow2.asm:asm-util:6.1.1'
+    testCompile 'org.json:json:20171018'
+    valueTypesTestCompile 'deltix:deltix-value-types:0.8.19'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Deltix Date & Time Classes',
+                   'Implementation-Version': version
+    }
+}
+
+test.outputs.upToDateWhen { false }
+
+task valueTypesTest(type: Test) {
+    dependsOn classes
+    outputs.upToDateWhen { false }
+    def vtAgentJar = configurations.valueTypesTestCompile.find {it.name.startsWith('deltix-value-types')}
+    def valueTypeAgent = '-javaagent:' + vtAgentJar + '=' + rootDir + "/java/hdt-vt.json"
+    jvmArgs += valueTypeAgent
+    testLogging {
+        exceptionFormat 'full'
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    group = 'verification'
+}
+
+publishing {
+    repositories {
+        maven {
+            url "https://packages.deltixhub.com/maven2/${findProperty('FEED_BASE_NAME') ?: 'Test'}.Java"
+            credentials {
+                username findProperty('PUBLISHER_USERNAME') ?: ''
+                password findProperty('PUBLISHER_PASSWORD') ?: ''
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact javadocJar
+        }
+    }
+}

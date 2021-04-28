@@ -1,0 +1,89 @@
+name: Release CI
+
+on:
+  - workflow_dispatch
+  - push
+jobs:
+  build_java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 1.8
+      - run: ./gradlew build test jar
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build_java
+          path: |
+            java/main/build/libs/
+  build_dotnet:
+    runs-on: windows-latest
+    steps:
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1
+      - uses: actions/checkout@v2
+      - uses: cake-build/cake-action@v1.2.0
+        with:
+          script-path: csharp/build.cake
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build_dotnet
+          path: |
+            csharp/EPAM.Deltix.HdTime/bin/Release/
+  test_java:
+    name: Java Test ${{ matrix.task }} ${{ matrix.os }}
+    needs: build_java
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-latest', 'windows-latest' ]
+        task: ['check', 'valueTypesTest']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build_java
+          path: java/main/build/libs/
+      - uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 1.8
+      - run: |
+          ./gradlew ${{ matrix.task }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: test-${{ matrix.task }}-${{ matrix.os }}
+          path: |
+            java/main/build/reports/*
+  test_dotnet:
+    needs: build_dotnet
+    name: Test dotnet ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-latest', 'windows-latest' ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build_dotnet
+          path: csharp/EPAM.Deltix.HdTime/bin/Release/
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1
+      - uses: cake-build/cake-action@v1.2.0
+        with:
+          script-path: csharp/build.cake
+          target: Run-Unit-Tests
+      - uses: actions/upload-artifact@v2
+        with:
+          name: test_dotnet_${{matrix.os}}
+          path: |
+            csharp/EPAM.Deltix.HdTime/bin/*
+            csharp/*.txt
+            csharp/*.xml

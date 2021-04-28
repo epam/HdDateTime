@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
+    <Authors>Deltix Inc.</Authors>
+    <Company>Deltix Inc.</Company>
+    <Description>High resolution timestamps and time intervals for .NET and Java</Description>
+    <Copyright>Copyright (C) 2017-2019, Deltix Inc.</Copyright>
+    <PackageProjectUrl>https://gitlab.deltixhub.com/Deltix/Common/HdDateTime</PackageProjectUrl>
+    <RepositoryUrl>git@gitlab.deltixhub.com:Deltix/Common/HdDateTime.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>.NET HdDateTime</PackageTags>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
+    <Version>0.0.0</Version>
+    <NoWarn>108</NoWarn>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\HdDateTime.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
+    <DocumentationFile>bin\Release\net40\RTMath.Containers.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Runtime" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <T4Transformer Include="*.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+</Project>

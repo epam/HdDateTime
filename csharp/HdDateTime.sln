@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPAM.Deltix.HdTime", "EPAM.Deltix.HdTime\EPAM.Deltix.HdTime.csproj", "{4A5BDF33-169C-45B5-9CBE-05D244CF66E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPAM.Deltix.HdTime.Tests", "EPAM.Deltix.HdTime.Tests\EPAM.Deltix.HdTime.Tests.csproj", "{DC478488-CC38-4D8B-B87E-1BE5A516E807}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A5BDF33-169C-45B5-9CBE-05D244CF66E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A5BDF33-169C-45B5-9CBE-05D244CF66E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A5BDF33-169C-45B5-9CBE-05D244CF66E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5BDF33-169C-45B5-9CBE-05D244CF66E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC478488-CC38-4D8B-B87E-1BE5A516E807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC478488-CC38-4D8B-B87E-1BE5A516E807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC478488-CC38-4D8B-B87E-1BE5A516E807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC478488-CC38-4D8B-B87E-1BE5A516E807}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {929A3232-95E5-43B0-B1AE-7AC518196B88}
+	EndGlobalSection
+EndGlobal
