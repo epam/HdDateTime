@@ -1,0 +1,2 @@
+include ':java:main'
+project(':java:main').name = 'hd-date-time'
