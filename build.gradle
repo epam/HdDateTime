@@ -1,2 +1,2 @@
 apply from: "$rootDir/gradle/Release.gradle"
-
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")

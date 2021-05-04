@@ -29,8 +29,9 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': ' Date & Time Classes',
-                   'Implementation-Version': version
+        attributes 'Implementation-Title': 'Date & Time Classes for Java & .NET with nanosecond precision',
+                   'Implementation-Version': archiveVersion,
+                   'Implementation-Vendor': 'EPAM'
     }
 }
 
@@ -70,15 +71,16 @@ publishing {
             from components.java
 
             pom {
-                name = 'value-types'
+                name = 'hd-date-time'
                 packaging = 'jar'
-                description = 'Java Agent classloader to implement transformation of operations on specific classes into operations on long integer values.'
-                url = 'https://github.com/epam/ValuesTypes4Java'
+                description = 'Date & Time Classes for Java & .NET having nanosecond precision, mostly ' +
+                        'match the functionality of .NET DateTime/TimeSpan, but have no timezone support and greater performance. '
+                url = 'https://github.com/epam/HdDateTime'
 
                 scm {
-                    connection = 'scm:git:https://github.com/epam/ValuesTypes4Java.git'
-                    developerConnection = 'scm:git:https://github.com/epam/ValuesTypes4Java.git'
-                    url = 'https://github.com/epam/ValuesTypes4Java.git'
+                    connection = 'scm:git:https://github.com/epam/HdDateTime.git'
+                    developerConnection = 'scm:git:https://github.com/epam/HdDateTime.git'
+                    url = 'https://github.com/epam/HdDateTime.git'
                 }
 
                 licenses {

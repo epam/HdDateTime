@@ -1,8 +1,8 @@
-name: Release CI
+name: Continuous Integration
 
 on:
-  - workflow_dispatch
-  - push
+  workflow_dispatch:
+  push:
 jobs:
   build_java:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ 'ubuntu-latest', 'windows-latest' ]
+        os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
         task: ['check', 'valueTypesTest']
     steps:
       - uses: actions/checkout@v2
