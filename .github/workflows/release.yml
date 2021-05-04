@@ -103,7 +103,7 @@ jobs:
         with:
           java-version: 8
       - name: Publish jars
-        run: ./gradlew :java:publish
+        run: ./gradlew :java:hd-date-time:publish
         env:
           SONATYPE_REPOSITORY: ${{ secrets.SONATYPE_REPOSITORY }}
           SONATYPE_NEXUS_USERNAME:   ${{ secrets.SONATYPE_NEXUS_USERNAME }}
