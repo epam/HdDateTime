@@ -1,5 +1,14 @@
 .vs/
+*.vc.db
+*.user
 .idea/
 .gradle/
-*.VC.db
-*.user
+
+/**/bin/
+/**/obj/
+/**/build/
+/**/out/
+/vt-classes/
+
+csharp/tools/*
+!csharp/tools/packages.config

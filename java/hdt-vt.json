@@ -16,30 +16,30 @@
 		"[LValueType; java.util.Arrays.copyOf([LValueType;ILjava/lang/Class;)",
 		"[LValueType; java.util.Arrays.copyOfRange([LValueType;II)",
 		"Z java/util/Arrays.equals([LValueType;[LValueType;)",
-		"V deltix.util.collections.SafeArrays.safeArrayCopy([LValueType;I[LValueType;II)",
-		"V deltix.vtype.unit.SafeArrayCopy.safeArrayCopy([LValueType;I[LValueType;II)",
-		"J deltix.util.memory.EstimatorUtils.getSizeInMemory([LValueType;)"
+		"V com.epam.deltix.util.collections.SafeArrays.safeArrayCopy([LValueType;I[LValueType;II)",
+		"V com.epam.deltix.vtype.unit.SafeArrayCopy.safeArrayCopy([LValueType;I[LValueType;II)",
+		"J com.epam.deltix.util.memory.EstimatorUtils.getSizeInMemory([LValueType;)"
 	],
 
 	"mappings" :
 	[
 		{
-			"name"			: "deltix/hddatetime/HdTimeSpan",
-			"implementation": "deltix/hddatetime/HdTimeSpanUtils",
-			"box"			: "deltix/hddatetime/HdTimeSpan deltix/hddatetime/HdTimeSpan.fromUnderlying(J)",
-			"unbox"			: "J deltix/hddatetime/HdTimeSpan.toUnderlying(Ldeltix/hddatetime/HdTimeSpan;)",
-			"boxArray"		: "[Ldeltix/hddatetime/HdTimeSpan; deltix/hddatetime/HdTimeSpanUtils.fromLongArray([J)",
-			"unboxArray"	: "[J deltix/hddatetime/HdTimeSpanUtils.toLongArray([Ldeltix/hddatetime/HdTimeSpan;)",
+			"name"			: "com/epam/deltix/hdtime/HdTimeSpan",
+			"implementation": "com/epam/deltix/hdtime/HdTimeSpanUtils",
+			"box"			: "com/epam/deltix/hdtime/HdTimeSpan com/epam/deltix/hdtime/HdTimeSpan.fromUnderlying(J)",
+			"unbox"			: "J com/epam/deltix/hdtime/HdTimeSpan.toUnderlying(Lcom/epam/deltix/hdtime/HdTimeSpan;)",
+			"boxArray"		: "[Lcom/epam/deltix/hdtime/HdTimeSpan; com/epam/deltix/hdtime/HdTimeSpanUtils.fromLongArray([J)",
+			"unboxArray"	: "[J com/epam/deltix/hdtime/HdTimeSpanUtils.toLongArray([Lcom/epam/deltix/hdtime/HdTimeSpan;)",
 			"methodSuffix"  : "Checked",
 			"staticMethodSuffix"  : ""
 		},
 		{
-			"name"			: "deltix/hddatetime/HdDateTime",
-			"implementation": "deltix/hddatetime/HdDateTimeUtils",
-			"box"			: "deltix/hddatetime/HdDateTime deltix/hddatetime/HdDateTime.fromUnderlying(J)",
-			"unbox"			: "J deltix/hddatetime/HdDateTime.toUnderlying(Ldeltix/hddatetime/HdDateTime;)",
-			"boxArray"		: "[Ldeltix/hddatetime/HdDateTime; deltix/hddatetime/HdDateTimeUtils.fromLongArray([J)",
-			"unboxArray"	: "[J deltix/hddatetime/HdDateTimeUtils.toLongArray([Ldeltix/hddatetime/HdDateTime;)",
+			"name"			: "com/epam/deltix/hdtime/HdDateTime",
+			"implementation": "com/epam/deltix/hdtime/HdDateTimeUtils",
+			"box"			: "com/epam/deltix/hdtime/HdDateTime com/epam/deltix/hdtime/HdDateTime.fromUnderlying(J)",
+			"unbox"			: "J com/epam/deltix/hdtime/HdDateTime.toUnderlying(Lcom/epam/deltix/hdtime/HdDateTime;)",
+			"boxArray"		: "[Lcom/epam/deltix/hdtime/HdDateTime; com/epam/deltix/hdtime/HdDateTimeUtils.fromLongArray([J)",
+			"unboxArray"	: "[J com/epam/deltix/hdtime/HdDateTimeUtils.toLongArray([Lcom/epam/deltix/hdtime/HdDateTime;)",
 			"methodSuffix"  : "Checked",
 			"staticMethodSuffix"  : ""
 		}

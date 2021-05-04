@@ -1,5 +1,6 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -10,28 +11,25 @@ configurations {
 
 repositories {
     mavenCentral()
-    // mavenDeltix("Deltix.Java")
-    // mavenDeltix("RTMath.Java")
-    //mavenLocal()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 dependencies {
     testCompile 'junit:junit:4.+'
 
-    testCompile 'org.ow2.asm:asm-tree:6.1.1'
-    testCompile 'org.ow2.asm:asm-util:6.1.1'
+    testCompile 'org.ow2.asm:asm-tree:7.2'
+    testCompile 'org.ow2.asm:asm-util:7.2'
     testCompile 'org.json:json:20171018'
-    valueTypesTestCompile 'deltix:deltix-value-types:0.8.19'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+    valueTypesTestCompile 'com.epam.deltix:value-types:0.9.3'
 }
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Deltix Date & Time Classes',
+        attributes 'Implementation-Title': ' Date & Time Classes',
                    'Implementation-Version': version
     }
 }
@@ -41,7 +39,7 @@ test.outputs.upToDateWhen { false }
 task valueTypesTest(type: Test) {
     dependsOn classes
     outputs.upToDateWhen { false }
-    def vtAgentJar = configurations.valueTypesTestCompile.find {it.name.startsWith('deltix-value-types')}
+    def vtAgentJar = configurations.valueTypesTestCompile.find {it.name.startsWith('value-types')}
     def valueTypeAgent = '-javaagent:' + vtAgentJar + '=' + rootDir + "/java/hdt-vt.json"
     jvmArgs += valueTypeAgent
     testLogging {
@@ -52,21 +50,65 @@ task valueTypesTest(type: Test) {
     group = 'verification'
 }
 
+def rUser = findProperty('SONATYPE_NEXUS_USERNAME') ?:  System.getenv('SONATYPE_NEXUS_USERNAME') ?: "FakeUser"
+def rPass = findProperty('SONATYPE_NEXUS_PASSWORD') ?:  System.getenv('SONATYPE_NEXUS_PASSWORD') ?: "FakePass"
+
 publishing {
     repositories {
         maven {
-            url "https://packages.deltixhub.com/maven2/${findProperty('FEED_BASE_NAME') ?: 'Test'}.Java"
+            url = findProperty('SONATYPE_REPOSITORY') ?: System.getenv('SONATYPE_REPOSITORY') ?: "FakeRepo"
+
             credentials {
-                username findProperty('PUBLISHER_USERNAME') ?: ''
-                password findProperty('PUBLISHER_PASSWORD') ?: ''
+                username rUser
+                password rPass
             }
         }
     }
 
     publications {
-        maven(MavenPublication) {
+        mavenJava(MavenPublication) {
             from components.java
-            artifact javadocJar
+
+            pom {
+                name = 'value-types'
+                packaging = 'jar'
+                description = 'Java Agent classloader to implement transformation of operations on specific classes into operations on long integer values.'
+                url = 'https://github.com/epam/ValuesTypes4Java'
+
+                scm {
+                    connection = 'scm:git:https://github.com/epam/ValuesTypes4Java.git'
+                    developerConnection = 'scm:git:https://github.com/epam/ValuesTypes4Java.git'
+                    url = 'https://github.com/epam/ValuesTypes4Java.git'
+                }
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'alex-karpovich'
+                        name = 'Alexander Karpovich'
+                        email = 'aliaksandr_karpovich@epam.com'
+                        url = 'https://github.com/alex-karpovich'
+                        organization = 'EPAM Systems'
+                        organizationUrl = 'https://www.epam.com/'
+                    }
+                }
+            }
         }
+    }
+
+    signing {
+        def signingKey = findProperty('SIGNING_PRIVATE_KEY') ?: System.getenv('SIGNING_PRIVATE_KEY') ?: "FakeUser"
+        def signingPassword = findProperty('SIGNING_PASSWORD') ?: System.getenv('SIGNING_PASSWORD') ?: "FakePass"
+
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.mavenJava
+
+        required { isReleaseVersion }
     }
 }
