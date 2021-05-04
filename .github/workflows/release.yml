@@ -67,7 +67,7 @@ jobs:
   release-java:
     name: Release Java
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
-    needs: build
+    needs: build-java
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -87,7 +87,7 @@ jobs:
   publish-java:
     name: Publish Maven Java
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
-    needs: release
+    needs: release-java
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -114,7 +114,7 @@ jobs:
   cleanup:
     name: Cleanup
     if: ${{ always() && !contains(github.event.head_commit.message, '[skip-ci]') }}
-    needs: publish
+    needs: publish-java
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
