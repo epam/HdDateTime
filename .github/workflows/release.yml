@@ -68,12 +68,20 @@ jobs:
     runs-on: windows-latest
     needs: prepare
     steps:
-      - name: Setup dotnet
+      - name: Setup dotNet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1
-      - uses: actions/checkout@v2
-      - uses: cake-build/cake-action@v1.2.0
+      - name: Chekout Code
+        uses: actions/checkout@v2
+      - name: Checkout branch (Windows)
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch
+          git checkout -b workflow-$env:GITHUB_RUN_ID origin/workflow-$env:GITHUB_RUN_ID~1
+      - name: Build dotNET
+        uses: cake-build/cake-action@v1.2.0
         with:
           script-path: csharp/build.cake
       - uses: actions/upload-artifact@v2
@@ -103,21 +111,23 @@ jobs:
           git push origin origin/workflow-$GITHUB_RUN_ID:$GITHUB_REF
           
   publish-dotnet:
+    name: Publish .NET artifiacts
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
     runs-on: windows-latest
     needs: release
     steps:
-      - name: Setup dotnet
+      - name: Setup dotNet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1
-      - name: Checkout code
+      - name: Chekout Code
         uses: actions/checkout@v2
-      - name: Checkout branch
+      - name: Checkout branch (Windows)
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git fetch
-          git checkout -b workflow-$GITHUB_RUN_ID origin/workflow-$GITHUB_RUN_ID~1
+          git checkout -b workflow-$env:GITHUB_RUN_ID origin/workflow-$env:GITHUB_RUN_ID~1
       - name: Publish with Cake
         uses: cake-build/cake-action@v1
         with:
