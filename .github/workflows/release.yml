@@ -63,11 +63,29 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Test with gradle
         run: ./gradlew build test jar
+        
+  build-dotnet:
+    runs-on: windows-latest
+    needs: prepare
+    steps:
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1
+      - uses: actions/checkout@v2
+      - uses: cake-build/cake-action@v1.2.0
+        with:
+          script-path: csharp/build.cake
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-dotnet
+          path: |
+            csharp/EPAM.Deltix.HdTime/bin/Release/
 
-  release-java:
-    name: Release Java
+  release:
+    name: Release
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
-    needs: build-java
+    needs: [build-java, build-dotnet]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -83,11 +101,34 @@ jobs:
           git tag $versionRelease
           git push origin $versionRelease
           git push origin origin/workflow-$GITHUB_RUN_ID:$GITHUB_REF
+          
+  publish-dotnet:
+    runs-on: windows-latest
+    needs: release
+    steps:
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Checkout branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch
+          git checkout -b workflow-$GITHUB_RUN_ID origin/workflow-$GITHUB_RUN_ID~1
+      - name: Publish with Cake
+        uses: cake-build/cake-action@v1
+        with:
+          target: Publish
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
   publish-java:
     name: Publish Maven Java
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
-    needs: release-java
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

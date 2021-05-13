@@ -128,14 +128,15 @@ Task("Pack")
     DotNetCorePack($"{csDir}", settings);
 });
 
-Task("Push")
+Task("Publish")
     .IsDependentOn("Pack")
     .Does(() =>
 {
-    var url = "https://packages.deltixhub.com/nuget/" + (EnvironmentVariable("FEED_BASE_NAME") ?? "Test") + ".NET";
-    var apiKey = (EnvironmentVariable("PUBLISHER_USERNAME") ?? "") + ":" + (EnvironmentVariable("PUBLISHER_PASSWORD") ?? "");
+    var url = "https://api.nuget.org/v3/index.json";
+    var apiKey = EnvironmentVariable("NUGET_API_KEY");
     foreach (var file in GetFiles($"{csDir}/artifacts/*.nupkg"))
     {
+	    //context.Information("Publishing {0}...", file.Path.GetFilename().FullPath);
         DotNetCoreTool($"{csDir}", "nuget", "push " + file.FullPath + " --source " + url + " --api-key " + apiKey);
     }
 });

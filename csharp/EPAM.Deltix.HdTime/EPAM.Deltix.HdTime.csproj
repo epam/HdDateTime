@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
-    <Authors>Deltix Inc.</Authors>
-    <Company>Deltix Inc.</Company>
-    <Description>High resolution timestamps and time intervals for .NET and Java</Description>
-    <Copyright>Copyright (C) 2017-2019, Deltix Inc.</Copyright>
-    <PackageProjectUrl>https://gitlab.deltixhub.com/Deltix/Common/HdDateTime</PackageProjectUrl>
-    <RepositoryUrl>git@gitlab.deltixhub.com:Deltix/Common/HdDateTime.git</RepositoryUrl>
+    <Authors>EPAM</Authors>
+    <Company>EPAM Systems, Inc.</Company>
+    <Description>High resolution timestamps and time intervals for .NET</Description>
+    <Copyright>Copyright © 2021 EPAM Systems, Inc.</Copyright>
+    <PackageProjectUrl>https://github.com/epam/HdDateTime</PackageProjectUrl>
+    <RepositoryUrl>git@github.com/epam/HdDateTime.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>.NET HdDateTime</PackageTags>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
