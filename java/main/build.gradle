@@ -19,7 +19,7 @@ java {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.+'
+    testCompile 'junit:junit:4.12'
 
     testCompile 'org.ow2.asm:asm-tree:7.2'
     testCompile 'org.ow2.asm:asm-util:7.2'
