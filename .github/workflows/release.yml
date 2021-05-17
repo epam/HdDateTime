@@ -131,6 +131,7 @@ jobs:
       - name: Publish with Cake
         uses: cake-build/cake-action@v1
         with:
+          script-path: csharp/build.cake
           target: Publish
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
