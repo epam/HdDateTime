@@ -10,5 +10,6 @@
 /**/out/
 /vt-classes/
 
+csharp/atrifacts/*
 csharp/tools/*
 !csharp/tools/packages.config
