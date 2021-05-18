@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.epam.deltix.hdtime;
+package com.epam.deltix.hdtime;
 
 public interface Formattable {
     /**
