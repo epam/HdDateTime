@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <Authors>EPAM</Authors>
@@ -15,6 +15,11 @@
     <NoWarn>108</NoWarn>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -26,13 +31,16 @@
     <DocumentationFile>bin\Release\netstandard2.0\HdDateTime.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
-    <DocumentationFile>bin\Release\net40\RTMath.Containers.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\net40\HdDateTime.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Runtime" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <T4Transformer Include="*.tt" />
+  </ItemGroup>
+  <ItemGroup>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
