@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.epam.deltix.hdtime;
+package com.epam.deltix.hdtime;
 
 public class ParsedDateTimeValue extends ParsedValue {
     int year;       // Year, always 4 digit integer
@@ -32,4 +32,3 @@ public class ParsedDateTimeValue extends ParsedValue {
         year = month = day = 1;
     }
 }
-

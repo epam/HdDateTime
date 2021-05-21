@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.epam.deltix.hdtime;
+package com.epam.deltix.hdtime;
 
 /**
  * Specify Warnings to suppress. Read Warning messages for more details.
@@ -22,4 +22,3 @@ package com.epam.deltix.hdtime;
 public @interface ValueTypeSuppressWarnings {
     String[] value();
 }
-
